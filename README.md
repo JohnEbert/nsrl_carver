@@ -11,6 +11,6 @@ Script1, ./NSRL2MD5.bash, run first to produce a data reduced and optimized thre
 
 Script 2, ./prodcorecarver.bash will carve the default example sub-hashset for Windows 7 AND Operating system type records. You can edit the prodcodecarver column string values, or add or drop any of the record columns of interest in the gawk script to select for any other strings in the NSRLProd.txt file you would prefer to carve for. Windows7 is just there as an example. Try carving for "Hotdog" as an example alternative, or maybe VMware.
 
-Script 3, ./recordcarverx,bash will automatically recieve the code list prodcodecarver.txt from ./prodcodecarver.bash. You can alternatively just enter the codes on the command line if you know therm. See the script comments for how to do that.
+Script 3, ./recordcarverx.bash will automatically recieve the code list prodcodecarver.txt from ./prodcodecarver.bash. You can alternatively just enter the codes on the command line if you know therm. See the script comments for how to do that.
 
 It will take about (1 minute per code or less) to extract all filenames and Md5 hashes from the NSRLFile2.txt on a dual-core to your new custom child hashset. The script will evaluate for 6 codes per pass per record all the way through the entire NSRL and loop back until all codes being searched for are finished. Less codes, less time carving. There are some per-loop screen display status messages to indicate life is still present as processing progresses. Be patient, 20Gb is a lot of data to search over multiple passes.
