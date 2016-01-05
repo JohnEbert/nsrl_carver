@@ -1,6 +1,8 @@
 # nsrl_carver
 Three BASH scripts (easily modified) to carve custom hashsets out of the NSRL RDS_Unified hashset. The example default is configured to carve all record codes and product file names for (~Windows 7 AND ~Operating System) type into sub-hashset and companion idx files named customhash.txt and customhash.txt-md5.idx useful in tools like Autopsy.
 
+My philosophy is that adding selected hashsets of interest as either known good, or "of interest" (I hate the term 'known bad') is a far more flexible and time efficient act of analysis than dumping the entire NSRL into the known anything box of an analysis engine. Since I could not find a tool preparing derivatives of the NSRL for carving and searching analysis as I wanted, I made this one. This is a helpful tool for selective software audits or license audits for example, not only evidence finding. Another example: Maybe I want to search only for the software "Hotdog" (an old web builder from the 90s) or maybe only "VMware" then just extract all the codes and hashes and file names from the NSRL and put the resultant customhash into your analysis and fire it off.
+
 Before adding the custom hashsets and index files to a tool like Autopsy, you can easily internally rename the customhash.txt name inside the first records of the file using a text editor to match any renaming of the files externally if you choose to. This will probably be usefoo in the event you make many different derivative extractions out of the NSRL!
 
 You will of course have to download the NIST NSRL RDS_Unified .iso, extract it, and then place these 3 scripts into the RDS_Unified folder that holds the NSRLFile.txt hash base.
