@@ -1,7 +1,7 @@
 # nsrl_carver
-Three BASH scripts (easily modified) to carve custom hashsets out of the NSRL RDS_Unified hashset. The example default is configured to carve all record codes and product file names for (~Windows 7 AND ~Operating System) type into sub-hashset and companion idx filef named customhash.txt and customhash.txt-md5.idx useful in tools like Autopsy.
+Three BASH scripts (easily modified) to carve custom hashsets out of the NSRL RDS_Unified hashset. The example default is configured to carve all record codes and product file names for (~Windows 7 AND ~Operating System) type into sub-hashset and companion idx files named customhash.txt and customhash.txt-md5.idx useful in tools like Autopsy.
 
-Before adding the customhashsets and index files to a tool like Autopsy, you can easily internally rename the customhash.txt name inside the first records of the file using a text editor to match any renaming of the files externally if you choose to. This will probably be usefoo in the event you make many differnt derivative extractions out of the NSRL!
+Before adding the custom hashsets and index files to a tool like Autopsy, you can easily internally rename the customhash.txt name inside the first records of the file using a text editor to match any renaming of the files externally if you choose to. This will probably be usefoo in the event you make many different derivative extractions out of the NSRL!
 
 You will of course have to download the NIST NSRL RDS_Unified .iso, extract it, and then place these 3 scripts into the RDS_Unified folder that holds the NSRLFile.txt hash base.
 
