@@ -1,8 +1,10 @@
 # SCRIPTNAME: recordcarverx.bash
-# This script has a dependency; it expects pre-processed records produced by the scripts "NSRL2MD5.bash" and "prodcodecarver.bash"
-# Execution Option1: ./recordcarverx.bash $(< prodcodecarver.txt)
-# Execution Option2: ./recordcarverx.bash 123 456 789 ...
-# This script will AWK pattern match "n" number of input codes versus National Institute of Sciences NSRL RDS format hash record fields.
+# This script has two prerequisites; it expects pre-processed records produced by the scripts "NSRL2MD5.bash" and "prodcodecarver.bash"
+
+# Following satisfaction of pre-requisites:
+#	Execution Option1: ./recordcarverx.bash $(< prodcodecarver.txt)
+#	Execution Option2: ./recordcarverx.bash 123 456 789 ...
+# This script will GAWK pattern match "n" number of input codes versus National Institute of Sciences NSRL RDS format hash record fields.
 # This script will output matched records as a custom hash file and its companion "idx" file.
 #---------------------------------------------------------------------
 date1=$(date +"%s")
@@ -32,16 +34,16 @@ while (($#)); do
 #		Why? Comparison to nothing or null is illegal and all the variables must be set to something or the code breaks.
 #		Since we cannot ensure "n" may have a value, we must check each instance and handle for the possibility it is null.
 #
-		gawk	'$(NF)=='"${1:-0}"'||$(NF)=='"${2:-0}"'||$(NF)=='"${3:-0}"'|| \
-			 $(NF)=='"${4:-0}"'||$(NF)=='"${5:-0}"'||$(NF)=='"${6:-0}"' { print $1,$2 }' NSRLFile2.txt >> customtemp0.txt
+		gawk	-F/ '$(NF-1)=='"${1:-0}"'||$(NF-1)=='"${2:-0}"'||$(NF-1)=='"${3:-0}"'|| \
+			 $(NF-1)=='"${4:-0}"'||$(NF-1)=='"${5:-0}"'||$(NF-1)=='"${6:-0}"' { print $1,$2 }' NSRLFile2.txt >> customtemp0.txt
 
 #		"Shift" builtin bash command operates on the $@ environment variable values, $# keeps count of how many remain.
 		shift $n
 
 #	This section handles any remainder of parameters less than "n" to finish up search and zero-out $#
 	else
-		gawk '$(NF)=='"${1:-0}"'||$(NF)=='"${2:-0}"'||$(NF)=='"${3:-0}"'||\
-			 $(NF)=='"${4:-0}"'||$(NF)=='"${5:-0}"'||$(NF)=='"${6:-0}"' { print $1,$2 }' NSRLFile2.txt >> customtemp0.txt
+		gawk -F/ '$(NF-1)=='"${1:-0}"'||$(NF-1)=='"${2:-0}"'||$(NF-1)=='"${3:-0}"'||\
+			 $(NF-1)=='"${4:-0}"'||$(NF-1)=='"${5:-0}"'||$(NF-1)=='"${6:-0}"' { print $1,$2 }' NSRLFile2.txt >> customtemp0.txt
 		shift "$#"
 	fi
 done
@@ -54,13 +56,15 @@ echo $@
 gawk '{print $0}' IGNORECASE=1 customtemp0.txt | sort | uniq > customhash.txt
 
 # Build the Hash index
-echo "Building the hash index file"
+echo "Your new custome hash index file is:"
 hfind -i md5sum customhash.txt
-
+echo "Your new custome hash index file is:"
+ls -al customhash.txt-md5.idx
+echo
 echo "Your new hash file is:"
 ls -al customhash.txt
-
 echo
+
 date2=$(date +"%s")
 elapsed_seconds=$(($date2-$date1))
 echo "$(($elapsed_seconds / 60)) minutes and $(($elapsed_seconds % 60)) seconds elapsed."
