@@ -56,9 +56,8 @@ echo $@
 gawk '{print $0}' IGNORECASE=1 customtemp0.txt | sort | uniq > customhash.txt
 
 # Build the Hash index
-echo "Your new custome hash index file is:"
 hfind -i md5sum customhash.txt
-echo "Your new custome hash index file is:"
+echo "Your new custom hash index file is:"
 ls -al customhash.txt-md5.idx
 echo
 echo "Your new hash file is:"
